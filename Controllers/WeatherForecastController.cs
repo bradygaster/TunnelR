@@ -49,6 +49,20 @@ namespace ProductApi.Controllers
             .ToArray();
         }
 
+        [HttpGet("{zipCode}/{dayCount}", Name=nameof(GetByZipCodeForFuture))]
+        public IEnumerable<WeatherForecast> GetByZipCodeForFuture([FromRoute] string zipCode, 
+            [FromRoute] int dayCount)
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
+        }
+
         [HttpPost(Name=nameof(Post))]
         public IEnumerable<WeatherForecast> Post([FromBody] WeatherForecast weather)
         {

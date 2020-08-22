@@ -38,8 +38,8 @@ namespace ProductApi
 
             ApiCreateOrUpdateParameter parms = new ApiCreateOrUpdateParameter
             {
-                Path = $"{options.ApiId}{options.Version}",
-                Format = ContentFormat.OpenapijsonLink,
+                Path = $"{options.ApiId}/{builder.Version}",
+                Format = ContentFormat.SwaggerLinkJson,
                 Value = publicSwaggerUrl,
                 ServiceUrl = builder.RootUrl
             };
@@ -47,7 +47,7 @@ namespace ProductApi
             ApiManagementClient.Api.CreateOrUpdate(
                 options.ResourceGroupName,
                 options.ApiManagementServiceName,
-                $"{options.ApiId}/{options.Version}",
+                $"{options.ApiId}-{builder.Version}",
                 parms
             );
 
@@ -59,7 +59,6 @@ namespace ProductApi
     {
         public string ApiManagementServiceName { get; set; }
         public string ResourceGroupName { get; set; }
-        internal string Version { get; set; }
-        internal string ApiId { get; set; } = Assembly.GetExecutingAssembly().GetName().Name;
+        internal string ApiId { get; } = Assembly.GetExecutingAssembly().GetName().Name;
     }
 }

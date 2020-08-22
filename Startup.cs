@@ -1,22 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace ProductApi
 {
     public class Startup
     {
-        static string _version = "v1";
-        static string _documentName = $"products api ({_version})";
+        static string _version = "v2";
+        static string _documentName = $"Products API ({_version})";
 
         public Startup(IConfiguration configuration)
         {
@@ -31,7 +25,7 @@ namespace ProductApi
             services.AddControllers();
             services.AddSwaggerGen(setup =>
             {
-                setup.SwaggerDoc(_version, new Microsoft.OpenApi.Models.OpenApiInfo
+                setup.SwaggerDoc(_version, new OpenApiInfo
                 {
                     Title = _documentName,
                     Version = _version,
@@ -66,8 +60,7 @@ namespace ProductApi
                         .UseAzureApiMangement(new AzureApiManagementCreateApiOptions
                         {
                             ApiManagementServiceName = "apis",
-                            ResourceGroupName = "APIs",
-                            Version = _version,
+                            ResourceGroupName = "APIs"
                         });
                 });
             }

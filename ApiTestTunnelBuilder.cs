@@ -8,6 +8,7 @@ namespace ProductApi
 
         public string RootUrl => _rootUrl;
         public string OpenApiDocumentEndpoint => _openApiEndpoint;
+        public string Version => _version;
 
         public IApiTestTunnelBuilder WithVersion(string version)
         {

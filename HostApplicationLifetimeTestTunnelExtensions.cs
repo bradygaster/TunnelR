@@ -34,14 +34,14 @@ namespace ProductApi
                 ASPNETCORE_URLS.ToString().Split(';').FirstOrDefault(x => x.StartsWith("http:")) 
                 ?? ASPNETCORE_URLS.ToString().Split(';').First();
 
-            hostApplicationLifetime.ApplicationStarted.Register(() => 
-            {
-                buildTunnel?.Invoke(
-                    new ApiTestTunnelBuilder()
+            var builder = new ApiTestTunnelBuilder()
                         .WithRootUrl(rootUrl)
                         .WithOpenApiEndpoint(swaggerEndpoint)
-                        .WithVersion(version)
-                );
+                        .WithVersion(version);
+
+            hostApplicationLifetime.ApplicationStarted.Register(() => 
+            {
+                buildTunnel?.Invoke(builder);
             });
         }
     }
