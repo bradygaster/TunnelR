@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,8 +9,9 @@
     <PackageReference Include="Azure.ResourceManager.Resources" Version="1.0.0-preview.1" />
     <PackageReference Include="Microsoft.Azure.Management.ApiManagement" Version="6.0.0-preview" />
     <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.34.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
     <PackageReference Include="swashbuckle.aspnetcore" Version="5.5.1" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
-
 
 </Project>

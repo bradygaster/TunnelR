@@ -69,6 +69,6 @@ namespace ProductApi
 
         public string ApiManagementServiceName { get; set; }
         public string ResourceGroupName { get; set; }
-        internal string ApiId { get; } = Assembly.GetExecutingAssembly().GetName().Name;
+        internal string ApiId { get; } = Assembly.GetEntryAssembly().GetName().Name;
     }
 }
