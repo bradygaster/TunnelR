@@ -13,17 +13,14 @@
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-                "uriFormat": "%s/swagger"
-            },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "AZURE_CLIENT_ID":"",
                 "AZURE_CLIENT_SECRET":"",
                 "AZURE_TENANT_ID":"",
-                "AZURE_SUBSCRIPTION_ID":""
+                "AZURE_SUBSCRIPTION_ID":"",
+                "AZURE_API_MANAGEMENT_SERVICE":"",
+                "AZURE_RESOURCE_GROUP":""
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
