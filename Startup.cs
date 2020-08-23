@@ -9,9 +9,6 @@ namespace ProductApi
 {
     public class Startup
     {
-        static string _version = "v2";
-        static string _documentName = $"Products API ({_version})";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -23,17 +20,15 @@ namespace ProductApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(setup =>
+            services.AddSwaggerGen(setup => 
             {
-                setup.SwaggerDoc(_version, new OpenApiInfo
+                setup.SwaggerDoc("v3", new OpenApiInfo
                 {
-                    Title = _documentName,
-                    Version = _version,
-                    Description = _documentName
+                    Title = "Products API (v3)",
+                    Version = "v3"
                 });
             });
         }
-
         
         public void Configure(IApplicationBuilder app, 
             IWebHostEnvironment env,
@@ -44,24 +39,13 @@ namespace ProductApi
             {
                 app.UseDeveloperExceptionPage();
                 
-                app.UseSwagger(setup => 
-                {
-                    setup.SerializeAsV2 = true;
-                });
-                app.UseSwaggerUI(setup => 
-                {
-                    setup.SwaggerEndpoint($"/swagger/{_version}/swagger.json", _version);
-                });
+                app.UseSwagger();
 
                 host.UseApiTestTunnel(app, builder => 
                 {
                     builder
                         .UseNGrok()
-                        .UseAzureApiMangement(new AzureApiManagementCreateApiOptions
-                        {
-                            ApiManagementServiceName = "apis",
-                            ResourceGroupName = "APIs"
-                        });
+                        .UseAzureApiMangement();
                 });
             }
 

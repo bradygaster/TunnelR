@@ -18,8 +18,9 @@ namespace ProductApi
         public static ApiManagementClient ApiManagementClient { get; private set; }
 
         public static void UseAzureApiMangement(this IApiTestTunnelBuilder builder,
-            AzureApiManagementCreateApiOptions options)
+            AzureApiManagementCreateApiOptions options = null)
         {
+            options ??= new AzureApiManagementCreateApiOptions();
             var publicSwaggerUrl = $"{builder.RootUrl}/{builder.OpenApiDocumentEndpoint}";
             var subscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID");
             var clientId = Environment.GetEnvironmentVariable("AZURE_CLIENT_ID");
@@ -38,8 +39,8 @@ namespace ProductApi
 
             ApiCreateOrUpdateParameter parms = new ApiCreateOrUpdateParameter
             {
-                Path = $"{options.ApiId}/{builder.Version}",
-                Format = ContentFormat.SwaggerLinkJson,
+                Path = $"{options.ApiId}/{CleanVersion(builder.Version)}",
+                Format = ContentFormat.OpenapijsonLink,
                 Value = publicSwaggerUrl,
                 ServiceUrl = builder.RootUrl
             };
@@ -47,16 +48,25 @@ namespace ProductApi
             ApiManagementClient.Api.CreateOrUpdate(
                 options.ResourceGroupName,
                 options.ApiManagementServiceName,
-                $"{options.ApiId}-{builder.Version}",
+                $"{options.ApiId}-{CleanVersion(builder.Version)}",
                 parms
             );
+        }
 
-            Console.WriteLine(publicSwaggerUrl);
+        static string CleanVersion(string version)
+        {
+            return version.Replace('.', '-');
         }
     }
 
     public class AzureApiManagementCreateApiOptions
     {
+        public AzureApiManagementCreateApiOptions()
+        {
+            ApiManagementServiceName = Environment.GetEnvironmentVariable("AZURE_API_MANAGEMENT_SERVICE");
+            ResourceGroupName = Environment.GetEnvironmentVariable("AZURE_RESOURCE_GROUP");
+        }
+
         public string ApiManagementServiceName { get; set; }
         public string ResourceGroupName { get; set; }
         internal string ApiId { get; } = Assembly.GetExecutingAssembly().GetName().Name;
