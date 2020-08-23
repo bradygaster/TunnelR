@@ -1,17 +1,10 @@
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Text.Json;
 using System;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Resources.Models;
-using Azure.Identity;
 using Microsoft.Azure.Management.ApiManagement;
 using Microsoft.Azure.Management.ApiManagement.Models;
-using Microsoft.Rest;
 using Microsoft.Azure.Management.ResourceManager.Fluent;
 using System.Reflection;
 
-namespace ProductApi
+namespace Microsoft.Extensions.TestTunnel
 {
     public static class ApiTestTunnelBuilderAzureApiMangementExtensions
     {

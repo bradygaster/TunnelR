@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Microsoft.AspNetCore.TestTunnel\Microsoft.AspNetCore.TestTunnel.csproj" />
+    <ProjectReference Include="..\..\src\Microsoft.Extensions.TestTunnel\Microsoft.Extensions.TestTunnel.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

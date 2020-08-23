@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;
 
-namespace ProductApi
+namespace Microsoft.Extensions.TestTunnel
 {
     public static class HostApplicationLifetimeTestTunnelExtensions
     {

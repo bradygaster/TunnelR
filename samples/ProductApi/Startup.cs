@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.TestTunnel;
 
 namespace ProductApi
 {
@@ -22,10 +23,10 @@ namespace ProductApi
             services.AddControllers();
             services.AddSwaggerGen(setup => 
             {
-                setup.SwaggerDoc("v3", new OpenApiInfo
+                setup.SwaggerDoc("v4", new OpenApiInfo
                 {
-                    Title = "Products API (v3)",
-                    Version = "v3"
+                    Title = "Products API (v4)",
+                    Version = "v4"
                 });
             });
         }

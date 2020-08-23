@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
 
-namespace ProductApi
+namespace Microsoft.Extensions.TestTunnel
 {
     public static class ApiTestTunnelBuilderNGrokExtensions
     {

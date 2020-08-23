@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{11F06102-2829-49CA-95E1-47D67BD89D20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.AspNetCore.TestTunnel", "src\Microsoft.AspNetCore.TestTunnel\Microsoft.AspNetCore.TestTunnel.csproj", "{749F4A00-D640-4DDA-AE1B-99497A7F9798}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Extensions.TestTunnel", "src\Microsoft.Extensions.TestTunnel\Microsoft.Extensions.TestTunnel.csproj", "{749F4A00-D640-4DDA-AE1B-99497A7F9798}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{0AF09D92-04F3-4853-AFF1-412EAFA87ABD}"
 EndProject

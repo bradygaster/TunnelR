@@ -1,4 +1,4 @@
-namespace ProductApi
+namespace Microsoft.Extensions.TestTunnel
 {
     public class ApiTestTunnelBuilder : IApiTestTunnelBuilder
     {
