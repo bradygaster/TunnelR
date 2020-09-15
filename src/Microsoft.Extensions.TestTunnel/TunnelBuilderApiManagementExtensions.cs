@@ -3,14 +3,17 @@ using Microsoft.Azure.Management.ApiManagement;
 using Microsoft.Azure.Management.ApiManagement.Models;
 using Microsoft.Azure.Management.ResourceManager.Fluent;
 using System.Reflection;
+using TunnelR;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.TestTunnel
+namespace Microsoft.AspNetCore.Hosting
 {
-    public static class ApiTestTunnelBuilderAzureApiMangementExtensions
+    public static class TunnelBuilderApiManagementExtensions
     {
         public static ApiManagementClient ApiManagementClient { get; private set; }
 
-        public static void UseAzureApiMangement(this IApiTestTunnelBuilder builder,
+        public static void UseAzureApiMangement(this ITunnelBuilderThatHasAnOpenApiDocumentEndpoint builder,
             AzureApiManagementCreateApiOptions options = null)
         {
             options ??= new AzureApiManagementCreateApiOptions();
@@ -38,12 +41,16 @@ namespace Microsoft.Extensions.TestTunnel
                 ServiceUrl = builder.RootUrl
             };
 
-            ApiManagementClient.Api.CreateOrUpdate(
-                options.ResourceGroupName,
-                options.ApiManagementServiceName,
-                $"{options.ApiId}-{CleanVersion(builder.Version)}",
-                parms
-            );
+            // wait for the host to start to try to hit it
+            builder.Host.Services.GetService<IHostApplicationLifetime>().ApplicationStarted.Register(() =>
+            {
+                ApiManagementClient.Api.CreateOrUpdate(
+                    options.ResourceGroupName,
+                    options.ApiManagementServiceName,
+                    $"{options.ApiId}-{CleanVersion(builder.Version)}",
+                    parms
+                );
+            });
         }
 
         static string CleanVersion(string version)

@@ -1,4 +1,4 @@
-namespace Microsoft.Extensions.TestTunnel
+namespace TunnelR
 {
     public class Strings
     {

@@ -13,7 +13,18 @@ namespace ProductApi
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args)
+                .Build()
+#if DEBUG
+                .ConfigureTestTunnel(builder =>
+                {
+                    builder
+                        .UseNGrok()
+                        .UseSwashbuckleOpenApiEndpoint()
+                        .UseAzureApiMangement();
+                })
+#endif
+                .Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

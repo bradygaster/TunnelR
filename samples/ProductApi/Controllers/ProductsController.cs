@@ -25,35 +25,22 @@ namespace ProductApi.Controllers
             new Product { Id = 4, Name = "Sampler" },
         };
 
-        [HttpGet(Name=nameof(Get))]
+        [HttpGet(Name = nameof(Get))]
         public IEnumerable<Product> Get()
         {
             return _products;
         }
 
-        [HttpGet("{id}", Name=nameof(GetProduct))]
-        public Product GetProduct([FromRoute] int id)
-        {
-            return _products.First(x => x.Id == id);
-        }
+        //[HttpGet("{id}", Name = nameof(GetProduct))]
+        //public Product GetProduct([FromRoute] int id)
+        //{
+        //    return _products.First(x => x.Id == id);
+        //}
 
-        [HttpPost(Name=nameof(CreateProduct))]
-        public Product CreateProduct([FromBody] Product product)
-        {
-            return product;
-        }
-
-        [HttpPut("{id}", Name=nameof(UpdateProduct))]
-        public ActionResult<Product> UpdateProduct([FromRoute] int id, [FromBody] Product product)
-        {
-            var existing = _products.FirstOrDefault(x => x.Id == id);
-            if(existing == null)
-            {
-                return NotFound();
-            }
-            existing.Name = product.Name;
-            
-            return Ok(existing);
-        }
+        //[HttpPost(Name = nameof(CreateProduct))]
+        //public Product CreateProduct([FromBody] Product product)
+        //{
+        //    return product;
+        //}
     }
 }

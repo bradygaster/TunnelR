@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.TestTunnel;
+using TunnelR;
 
 namespace ProductApi
 {
@@ -21,33 +21,16 @@ namespace ProductApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(setup => 
-            {
-                setup.SwaggerDoc("v4", new OpenApiInfo
-                {
-                    Title = "Products API (v4)",
-                    Version = "v4"
-                });
-            });
+            services.AddSwaggerGen();
         }
         
-        public void Configure(IApplicationBuilder app, 
-            IWebHostEnvironment env,
-            IHostApplicationLifetime host
-            )
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 
                 app.UseSwagger();
-
-                host.UseApiTestTunnel(app, builder => 
-                {
-                    builder
-                        .UseNGrok()
-                        .UseAzureApiMangement();
-                });
             }
 
             app.UseHttpsRedirection();
