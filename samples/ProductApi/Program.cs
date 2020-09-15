@@ -19,9 +19,7 @@ namespace ProductApi
                 .ConfigureTestTunnel(builder =>
                 {
                     builder
-                        .UseNGrok()
-                        .UseSwashbuckleOpenApiEndpoint()
-                        .UseAzureApiMangement();
+                        .UseNGrok();
                 })
 #endif
                 .Run();
